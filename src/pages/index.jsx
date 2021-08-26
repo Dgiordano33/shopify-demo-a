@@ -12,7 +12,7 @@ import {
 
 export const query = graphql`
   query {
-    allShopifyProduct {
+    shopifyCollection(handle: { eq: "frontpage" }) {
       products {
         ...ProductCard
       }
@@ -20,11 +20,10 @@ export const query = graphql`
   }
 `
 
-
 function Hero (props) {
   return (
     <div className={container}>
-      <h1 className={intro}>Welcome to the Gatsby & Shopify Demo.</h1>
+      <h1 className={intro}>Welcome to the Gatsby + Shopify Demo.</h1>
       {!!process.env.GATSBY_DEMO_STORE && (
         <>
           <p className={callOut}>
@@ -53,7 +52,7 @@ export default function IndexPage({ data }) {
   return (
     <Layout>
       <Hero />
-      <ProductListing />
+      <ProductListing products={data?.shopifyCollection?.products} />
     </Layout>
   )
 }
