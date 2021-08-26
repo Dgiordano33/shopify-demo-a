@@ -11,14 +11,23 @@ import {
 } from "./index.module.css"
 
 export const query = graphql`
-  query {
-    shopifyCollection(handle: { eq: "frontpage" }) {
-      products {
+  query($productType: String!) {
+    products: allShopifyProduct(
+      filter: { productType: { eq: $productType } }
+      sort: { fields: publishedAt, order: ASC }
+      limit: 24
+    ) {
+      nodes {
         ...ProductCard
+      }
+      pageInfo {
+        hasNextPage
       }
     }
   }
 `
+
+
 function Hero (props) {
   return (
     <div className={container}>
