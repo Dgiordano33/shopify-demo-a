@@ -53,7 +53,7 @@ export default function IndexPage({ data }) {
   return (
     <Layout>
       <Hero />
-      <ProductListing products={data?.shopifyCollection?.products} />
+      <ProductListing products={data?.products} />
     </Layout>
   )
 }
